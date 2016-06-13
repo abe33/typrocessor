@@ -58,5 +58,15 @@ describe Typrocessor::Processor do
         end
       end
     end
+
+    context 'containing a replace rule with a block' do
+      let(:replace) do
+        Typrocessor::Replace.new('foobar', 'foo') {|m| m[0] }
+      end
+
+      it 'calls the block proc to perform the replacement' do
+        expect(processor.clean('foo "foo" foo')).to eql('f "foo" f')
+      end
+    end
   end
 end

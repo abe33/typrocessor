@@ -4,10 +4,14 @@ module Typrocessor
 
     attr_accessor :name, :expression, :replacement
 
-    def initialize(name, expression, replacement)
+    def initialize(name, expression, replacement=nil, &block)
       self.name = name
       self.expression = expression
-      self.replacement = replacement
+      self.replacement = block_given? ? block : replacement
+
+      if self.replacement.nil?
+        raise 'Missing replacement argument or block in Replace.new'
+      end
     end
 
     def exec(string)
