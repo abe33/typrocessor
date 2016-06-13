@@ -72,5 +72,14 @@ describe Typrocessor::Processor do
         expect(processor.clean('foo "foo" foo')).to eql('f "foo" f')
       end
     end
+
+    context 'that are nested into arrays' do
+      let(:replace) { [Typrocessor::Replace.new('foobar', 'foo', 'bar')] }
+      let(:ignore) { [Typrocessor::Ignore.new('in quotes', /"[^"]+"/)] }
+
+      it 'applies the rules on the passed-in string' do
+        expect(processor.clean('foo "foo" foo')).to eql('bar "foo" bar')
+      end
+    end
   end
 end

@@ -9,10 +9,12 @@ module Typrocessor
 
     def clean(string)
       return if string.nil?
-      return string if self.rules.empty?
 
-      replaces = self.rules.select {|r| r.is_a?(Typrocessor::Replace) }
-      ignores = self.rules.select {|r| r.is_a?(Typrocessor::Ignore) }
+      flatten_rules = self.rules.flatten
+      return string if flatten_rules.empty?
+
+      replaces = flatten_rules.select {|r| r.is_a?(Typrocessor::Replace) }
+      ignores = flatten_rules.select {|r| r.is_a?(Typrocessor::Ignore) }
 
       return string if replaces.empty?
 
@@ -25,6 +27,8 @@ module Typrocessor
         excluded
       )
     end
+
+  private
 
     def ranges_intersects (range_a, range_b)
       start_a, end_a = range_a

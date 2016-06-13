@@ -14,6 +14,8 @@ module Typrocessor
       inverted ? inverted_ranges(string) : regular_ranges(string)
     end
 
+  private
+
     def regular_ranges(string)
       re = get_regexp
 
