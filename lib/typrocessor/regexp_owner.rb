@@ -1,13 +1,5 @@
 module Typrocessor
-  class Rule
-    attr_accessor :name, :expression, :replacement
-
-    def initialize(name, expression, replacement)
-      self.name = name
-      self.expression = expression
-      self.replacement = replacement
-    end
-
+  module RegExpOwner
     def source
       expression.is_a?(Regexp) ? expression.source.force_encoding('utf-8') : expression
     end
@@ -24,14 +16,5 @@ module Typrocessor
       flags
     end
 
-    def fix (string)
-      regex = Regexp.new(source, options)
-
-      if replacement.is_a?(Proc)
-        string.gsub(regex, &replacement)
-      else
-        string.gsub(regex, replacement)
-      end
-    end
   end
 end

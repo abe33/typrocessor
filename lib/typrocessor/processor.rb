@@ -11,17 +11,17 @@ module Typrocessor
       return if string.nil?
       return string if self.rules.empty?
 
-      rules = self.rules.select {|r| r.is_a?(Typrocessor::Rule) }
+      replaces = self.rules.select {|r| r.is_a?(Typrocessor::Replace) }
       ignores = self.rules.select {|r| r.is_a?(Typrocessor::Ignore) }
 
-      return string if rules.empty?
+      return string if replaces.empty?
 
       ranges = compact_ranges(ignores.map {|i| i.ranges(string) }.flatten(1))
 
       included, excluded = split_by_ranges(string, ranges)
 
       alternate_join(
-        included.map {|s| rules.reduce(s) {|s, rule| rule.fix(s) } },
+        included.map {|s| replaces.reduce(s) {|s, replace| replace.exec(s) } },
         excluded
       )
     end

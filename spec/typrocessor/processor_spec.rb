@@ -3,7 +3,7 @@ require 'spec_helper'
 describe Typrocessor::Processor do
   let(:options) { Hash.new }
   let(:processor) { Typrocessor::Processor.new(options) }
-  let(:rule) { Typrocessor::Rule.new('foobar', 'foo', 'bar') }
+  let(:replace) { Typrocessor::Replace.new('foobar', 'foo', 'bar') }
   let(:ignore) { Typrocessor::Ignore.new('in quotes', /"[^"]+"/) }
 
   context 'created without rules' do
@@ -32,11 +32,11 @@ describe Typrocessor::Processor do
 
   context 'created with an array of rules' do
     let(:options) do
-      { rules: [rule, ignore] }
+      { rules: [replace, ignore] }
     end
 
     it 'has a rules array filled with the provided rules' do
-      expect(processor.rules).to eq([rule, ignore])
+      expect(processor.rules).to eq([replace, ignore])
     end
 
     describe '#clean' do
@@ -46,6 +46,16 @@ describe Typrocessor::Processor do
 
       it 'applies the rules on the passed-in string' do
         expect(processor.clean('foo "foo" foo')).to eql('bar "foo" bar')
+      end
+    end
+
+    context 'containing an inverted ignore rule' do
+      let(:ignore) { Typrocessor::Ignore.new('in quotes', /"[^"]+"/, true) }
+
+      describe '#clean' do
+        it 'applies the rules on the passed-in string' do
+          expect(processor.clean('foo "foo" foo')).to eql('foo "bar" foo')
+        end
       end
     end
   end
