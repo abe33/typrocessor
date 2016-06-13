@@ -15,27 +15,27 @@ class Typrocessor
 
     return string if rules.empty?
 
-    ranges = compactRanges(ignores.map {|i| i.ranges(string) }.flatten(1))
+    ranges = compact_ranges(ignores.map {|i| i.ranges(string) }.flatten(1))
 
-    included, excluded = splitByRanges(string, ranges)
+    included, excluded = split_by_ranges(string, ranges)
 
-    alternateJoin(
-      included.map {|s,i| rules.reduce(s) {|s, rule| rule.fix(s) } },
+    alternate_join(
+      included.map {|s| rules.reduce(s) {|s, rule| rule.fix(s) } },
       excluded
     )
   end
 
-  def rangesIntersects (rangeA, rangeB)
-    startA, endA = rangeA
-    startB, endB = rangeB
+  def ranges_intersects (range_a, range_b)
+    start_a, end_a = range_a
+    start_b, end_b = range_b
 
-    return (startB >= startA && startB <= endA) ||
-           (endB >= startA && endB <= endA) ||
-           (startA >= startB && startA <= endB) ||
-           (endA >= startB && endA <= endB)
+    (start_b >= start_a && start_b <= end_a) ||
+    (end_b >= start_a && end_b <= end_a) ||
+    (start_a >= start_b && start_a <= end_b) ||
+    (end_a >= start_b && end_a <= end_b)
   end
 
-  def splitByRanges (string, ranges)
+  def split_by_ranges (string, ranges)
     included = []
     excluded = []
 
@@ -50,7 +50,7 @@ class Typrocessor
     return [included, excluded]
   end
 
-  def alternateJoin (a, b)
+  def alternate_join (a, b)
     string = ''
 
     a.each_with_index do |s, i|
@@ -61,28 +61,28 @@ class Typrocessor
     return string
   end
 
-  def compactRanges (ranges)
+  def compact_ranges (ranges)
     return [] if ranges.empty?
 
-    newRanges = ranges.reduce [] do |memo, rangeA|
+    new_ranges = ranges.reduce [] do |memo, range_a|
       if memo.empty?
-        memo << rangeA
+        memo << range_a
         memo
       else
-        newMemo = memo.select do |rangeB|
-          if rangesIntersects(rangeA, rangeB)
-            rangeA[0] = [rangeA[0], rangeB[0]].min
-            rangeA[1] = [rangeA[1], rangeB[1]].max
+        new_memo = memo.select do |range_b|
+          if ranges_intersects(range_a, range_b)
+            range_a[0] = [range_a[0], range_b[0]].min
+            range_a[1] = [range_a[1], range_b[1]].max
             false
           else
             true
           end
         end
 
-        newMemo + [rangeA]
+        new_memo + [range_a]
       end
     end
 
-    newRanges.sort {|a, b| a[0] - b[0] }
+    new_ranges.sort {|a, b| a[0] - b[0] }
   end
 end
