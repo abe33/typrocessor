@@ -1,10 +1,10 @@
 require 'spec_helper'
 
-describe Typrocessor do
+describe Typrocessor::Processor do
   let(:options) { Hash.new }
-  let(:processor) { Typrocessor.new(options) }
-  let(:rule) { Rule.new('foobar', 'foo', 'bar') }
-  let(:ignore) { Ignore.new('in quotes', /"[^"]+"/) }
+  let(:processor) { Typrocessor::Processor.new(options) }
+  let(:rule) { Typrocessor::Rule.new('foobar', 'foo', 'bar') }
+  let(:ignore) { Typrocessor::Ignore.new('in quotes', /"[^"]+"/) }
 
   context 'created without rules' do
     it 'has an empty array of rules' do
