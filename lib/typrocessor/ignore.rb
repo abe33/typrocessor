@@ -44,7 +44,7 @@ module Typrocessor
         match = re.match(string, next_start)
       end
 
-      ranges << [next_start, string.size - 1] if next_start != string.size - 1
+      ranges << [next_start, string.size] if next_start != string.size
 
       ranges
     end

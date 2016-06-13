@@ -26,6 +26,8 @@ describe Typrocessor::Processor do
     describe '#clean' do
       it 'returns the passed-in string as is' do
         expect(processor.clean('foo "foo" foo')).to eql('foo "foo" foo')
+        expect(processor.clean('"foo" foo')).to eql('"foo" foo')
+        expect(processor.clean('foo "foo"')).to eql('foo "foo"')
       end
     end
   end
@@ -55,6 +57,8 @@ describe Typrocessor::Processor do
       describe '#clean' do
         it 'applies the rules on the passed-in string' do
           expect(processor.clean('foo "foo" foo')).to eql('foo "bar" foo')
+          expect(processor.clean('"foo" foo')).to eql('"bar" foo')
+          expect(processor.clean('foo "foo"')).to eql('foo "bar"')
         end
       end
     end
