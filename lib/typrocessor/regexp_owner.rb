@@ -1,20 +1,23 @@
 module Typrocessor
   module RegExpOwner
+    def get_regexp
+      Regexp.new(source, options)
+    end
+
     def source
-      expression.is_a?(Regexp) ? expression.source.force_encoding('utf-8') : expression
+      expression.is_a?(Regexp) ?
+        expression.source.force_encoding('utf-8') :
+        expression
     end
 
     def options
-      flags = 0
-      if expression.is_a?(Regexp)
-        flags += Regexp::IGNORECASE if (expression.options & Regexp::IGNORECASE) > 0
-        flags += Regexp::MULTILINE if (expression.options & Regexp::MULTILINE) > 0
-      else
-        flags = 0
-      end
-
-      flags
+      expression.is_a?(Regexp) ?
+        flags.reduce(0) {|m,f| (expression.options & f) > 0 ? m + f : m } :
+        0
     end
 
+    def flags
+      [Regexp::IGNORECASE, Regexp::MULTILINE]
+    end
   end
 end

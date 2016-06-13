@@ -15,11 +15,11 @@ module Typrocessor
     end
 
     def exec(string)
-      regex = Regexp.new(source, options)
+      re = get_regexp
 
       replacement.is_a?(Proc) ?
-        string.gsub(regex, &replacement) :
-        string.gsub(regex, replacement)
+        string.gsub(re, &replacement) :
+        string.gsub(re, replacement)
     end
   end
 end

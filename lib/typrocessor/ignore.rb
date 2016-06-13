@@ -15,7 +15,7 @@ module Typrocessor
     end
 
     def regular_ranges(string)
-      re = Regexp.new(source, options)
+      re = get_regexp
 
       ranges = []
       match = re.match(string)
@@ -31,7 +31,7 @@ module Typrocessor
     end
 
     def inverted_ranges(string)
-      re = Regexp.new(source, options)
+      re = get_regexp
 
       ranges = []
       match = re.match(string)
