@@ -1,5 +1,5 @@
 module Typrocessor
-  module Contants
+  module Constants
     FRACTIONS = [
       [1, 4,  "\u00bc"],
       [1, 2,  "\u00bd"],

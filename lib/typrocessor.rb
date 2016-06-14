@@ -3,7 +3,7 @@ require 'typrocessor/ruleset_maker'
 require 'typrocessor/processor'
 require 'typrocessor/replace'
 require 'typrocessor/ignore'
-require 'typrocessor/contants'
+require 'typrocessor/constants'
 
 require 'typrocessor/ignores/html'
 require 'typrocessor/ignores/markdown'

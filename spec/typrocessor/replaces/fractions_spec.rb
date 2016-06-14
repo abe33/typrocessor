@@ -4,7 +4,7 @@ describe 'Typrocessor::Replace::Fractions' do
   let(:processor) { Typrocessor::Processor.new(options) }
   let(:options) do { rules: [Typrocessor::Replace::Fractions] } end
 
-  Typrocessor::Contants::FRACTIONS.each do |a,b,expected|
+  Typrocessor::Constants::FRACTIONS.each do |a,b,expected|
     it "replaces #{a}/#{b} with #{expected}" do
       expect(processor.process("#{a}/#{b}")).to eq(expected)
       expect(processor.process("#{a} / #{b}")).to eq(expected)
