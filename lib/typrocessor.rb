@@ -9,6 +9,7 @@ require 'typrocessor/ignores/html'
 
 require 'typrocessor/replaces/html'
 require 'typrocessor/replaces/line_breaks'
+require 'typrocessor/replaces/symbols'
 
 module Typrocessor
 end
