@@ -2,11 +2,7 @@ require 'spec_helper'
 
 describe 'Typrocessor::Replace::HTML' do
   let(:processor) { Typrocessor::Processor.new(options) }
-  let(:options) do
-    {rules: [
-      Typrocessor::Replace::HTML
-    ]}
-  end
+  let(:options) do { rules: [Typrocessor::Replace::HTML] } end
 
   it 'wraps quotation marks in a span' do
     expect(processor.process("\u00abfoo\u00bb.")).to eq("<span class=\"dquo\">\u00ab</span>foo<span class=\"dquo\">\u00bb</span>.")

@@ -8,6 +8,7 @@ require 'typrocessor/ignores/markdown'
 require 'typrocessor/ignores/html'
 
 require 'typrocessor/replaces/html'
+require 'typrocessor/replaces/line_breaks'
 
 module Typrocessor
 end
