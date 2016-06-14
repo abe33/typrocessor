@@ -7,5 +7,7 @@ require 'typrocessor/ignore'
 require 'typrocessor/ignores/markdown'
 require 'typrocessor/ignores/html'
 
+require 'typrocessor/replaces/html'
+
 module Typrocessor
 end
