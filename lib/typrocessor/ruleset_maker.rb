@@ -1,9 +1,7 @@
 module Typrocessor
   module RulesetMaker
-    def ruleset(&block)
-      collection = Typrocessor::Ruleset.new
-      collection.instance_eval(&block)
-      collection
+    def ruleset(name=nil, &block)
+      Typrocessor::Ruleset.create(name, &block)
     end
   end
 end
