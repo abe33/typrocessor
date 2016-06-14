@@ -49,6 +49,14 @@ describe Typrocessor::Processor do
       it 'applies the rules on the passed-in string' do
         expect(processor.clean('foo "foo" foo')).to eql('bar "foo" bar')
       end
+
+      it 'applies the rules in order' do
+        processor = Typrocessor::Processor.new(rules: [
+          Typrocessor::Replace.new('foo 1', 'foo', 'bar'),
+          Typrocessor::Replace.new('foo 2', 'foo', 'baz')
+        ])
+        expect(processor.clean('foo "foo" foo')).to eql('bar "bar" bar')
+      end
     end
 
     context 'containing an inverted ignore rule' do
