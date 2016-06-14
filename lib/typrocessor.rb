@@ -17,5 +17,7 @@ require 'typrocessor/replaces/punctuations'
 require 'typrocessor/replaces/symbols'
 require 'typrocessor/replaces/units'
 
+require 'typrocessor/replaces/en_uk'
+
 module Typrocessor
 end
