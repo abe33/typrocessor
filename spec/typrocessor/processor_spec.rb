@@ -13,7 +13,7 @@ describe Typrocessor::Processor do
 
     describe '#clean' do
       it 'returns the passed-in string as is' do
-        expect(processor.clean('foo "foo" foo')).to eql('foo "foo" foo')
+        expect(processor.process('foo "foo" foo')).to eql('foo "foo" foo')
       end
     end
   end
@@ -25,9 +25,9 @@ describe Typrocessor::Processor do
 
     describe '#clean' do
       it 'returns the passed-in string as is' do
-        expect(processor.clean('foo "foo" foo')).to eql('foo "foo" foo')
-        expect(processor.clean('"foo" foo')).to eql('"foo" foo')
-        expect(processor.clean('foo "foo"')).to eql('foo "foo"')
+        expect(processor.process('foo "foo" foo')).to eql('foo "foo" foo')
+        expect(processor.process('"foo" foo')).to eql('"foo" foo')
+        expect(processor.process('foo "foo"')).to eql('foo "foo"')
       end
     end
   end
@@ -43,11 +43,11 @@ describe Typrocessor::Processor do
 
     describe '#clean' do
       it 'returns nil when passed nil' do
-        expect(processor.clean(nil)).to be_nil
+        expect(processor.process(nil)).to be_nil
       end
 
       it 'applies the rules on the passed-in string' do
-        expect(processor.clean('foo "foo" foo')).to eql('bar "foo" bar')
+        expect(processor.process('foo "foo" foo')).to eql('bar "foo" bar')
       end
 
       it 'applies the rules in order' do
@@ -55,7 +55,7 @@ describe Typrocessor::Processor do
           Typrocessor::Replace.new('foo 1', 'foo', 'bar'),
           Typrocessor::Replace.new('foo 2', 'foo', 'baz')
         ])
-        expect(processor.clean('foo "foo" foo')).to eql('bar "bar" bar')
+        expect(processor.process('foo "foo" foo')).to eql('bar "bar" bar')
       end
     end
 
@@ -64,9 +64,9 @@ describe Typrocessor::Processor do
 
       describe '#clean' do
         it 'applies the rules on the passed-in string' do
-          expect(processor.clean('foo "foo" foo')).to eql('foo "bar" foo')
-          expect(processor.clean('"foo" foo')).to eql('"bar" foo')
-          expect(processor.clean('foo "foo"')).to eql('foo "bar"')
+          expect(processor.process('foo "foo" foo')).to eql('foo "bar" foo')
+          expect(processor.process('"foo" foo')).to eql('"bar" foo')
+          expect(processor.process('foo "foo"')).to eql('foo "bar"')
         end
       end
     end
@@ -77,7 +77,7 @@ describe Typrocessor::Processor do
       end
 
       it 'calls the block proc to perform the replacement' do
-        expect(processor.clean('foo "foo" foo')).to eql('f "foo" f')
+        expect(processor.process('foo "foo" foo')).to eql('f "foo" f')
       end
     end
 
@@ -86,7 +86,7 @@ describe Typrocessor::Processor do
       let(:ignore) { [Typrocessor::Ignore.new('in quotes', /"[^"]+"/)] }
 
       it 'applies the rules on the passed-in string' do
-        expect(processor.clean('foo "foo" foo')).to eql('bar "foo" bar')
+        expect(processor.process('foo "foo" foo')).to eql('bar "foo" bar')
       end
     end
   end

@@ -7,7 +7,7 @@ module Typrocessor
       self.rules = options.delete(:rules) if options.has_key?(:rules)
     end
 
-    def clean(string)
+    def process(string)
       return if string.nil?
 
       flatten_rules = self.rules.flatten
