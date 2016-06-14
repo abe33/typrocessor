@@ -1,5 +1,6 @@
 module Typrocessor
   class Ignore
+    extend Typrocessor::RulesetMaker
     include Typrocessor::RegExpOwner
 
     attr_accessor :name, :expression, :inverted
