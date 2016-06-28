@@ -1,5 +1,15 @@
 module Typrocessor
   module Constants
+    SPACE_CHARS = [
+      "\s",
+      "\u00a0",
+      "\u202f",
+    ]
+
+    ANY_SPACE = "(?:#{SPACE_CHARS.join('|')})"
+
+    SPACE_GROUP = SPACE_CHARS.join('')
+
     FRACTIONS = [
       [1, 4,  "\u00bc"],
       [1, 2,  "\u00bd"],
