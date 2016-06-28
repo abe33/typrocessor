@@ -18,6 +18,7 @@ require 'typrocessor/replaces/punctuations'
 require 'typrocessor/replaces/spaces'
 require 'typrocessor/replaces/symbols'
 require 'typrocessor/replaces/units'
+require 'typrocessor/replaces/primes'
 
 require 'typrocessor/replaces/en_uk'
 
