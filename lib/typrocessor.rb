@@ -11,7 +11,7 @@ require 'typrocessor/uppercase'
 require 'typrocessor/ignores/html'
 require 'typrocessor/ignores/markdown'
 
-require 'typrocessor/replaces/fractions'
+require 'typrocessor/replaces/math'
 require 'typrocessor/replaces/html'
 require 'typrocessor/replaces/line_breaks'
 require 'typrocessor/replaces/punctuations'
