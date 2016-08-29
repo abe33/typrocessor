@@ -21,6 +21,7 @@ require 'typrocessor/replaces/units'
 require 'typrocessor/replaces/primes'
 
 require 'typrocessor/replaces/en_uk'
+require 'typrocessor/replaces/fr_fr'
 
 module Typrocessor
 end
