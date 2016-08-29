@@ -12,8 +12,8 @@ module Typrocessor
       self.name = name
     end
 
-    def replace(*args)
-      self << Typrocessor::Replace.new(*args)
+    def replace(*args, &block)
+      self << Typrocessor::Replace.new(*args, &block)
     end
 
     def ignore(*args)
