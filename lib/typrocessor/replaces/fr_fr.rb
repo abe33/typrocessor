@@ -76,6 +76,36 @@ module Typrocessor::Replace::Fr_FR
     replace 'upper ae', /A[eE]/, "\u00c6"
   end
 
+  Numbers = ruleset do
+    scales = {
+      '1000000' => 'million',
+      '1000000000' => 'milliard',
+      '1000000000000' => 'billion',
+      '1000000000000000' => 'billiard',
+      '1000000000000000000' => 'trillion',
+      '1000000000000000000000' => 'trilliard',
+    }
+
+    scales.each_pair do |value, word|
+      divider = value.to_f
+      size = value.size
+
+      replace "#{value}s", /(?<!\d)\d{#{size},#{size + 2}}(?![,.\d])/ do |m|
+        if m =~ /0{#{size-2},#{size-1}}$/
+          n = m.to_i / divider
+          n >= 2 ? "#{n} #{word}s" : "#{n} #{word}"
+        else
+          m
+        end
+      end
+    end
+
+    replace 'number spacing', /\d{4}\d+/ do |m|
+      m.reverse.split(/(\d{3})/).select {|s| !s.empty? }.join(' ').reverse
+    end
+    replace 'dot in number', /(\d)\.(\d)/, '\1,\2'
+  end
+
   HTML = ruleset do
     replace 'abbr with super text', /\b(Mmes|Mme|Mlles|Mlle|Me|Mgr|Dr|cie|Cie|Sté)\b/ do |m|
       "#{m[0]}<sup>#{m[1..-1]}</sup>"
