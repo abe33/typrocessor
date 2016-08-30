@@ -77,7 +77,7 @@ module Typrocessor::Replace::Fr_FR
   end
 
   HTML = ruleset do
-    replace 'abbr with super text', /Mmes|Mme|Mlles|Mlle|Me|Mgr|Dr|cie|Cie|Sté/ do |m|
+    replace 'abbr with super text', /\b(Mmes|Mme|Mlles|Mlle|Me|Mgr|Dr|cie|Cie|Sté)\b/ do |m|
       "#{m[0]}<sup>#{m[1..-1]}</sup>"
     end
     replace 'ordinal numbers', /(\d)(res|re|es|e|èmes)/, '\1<sup class="ord">\2</sup>'

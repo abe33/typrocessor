@@ -292,7 +292,11 @@ describe 'Typrocessor::Replace::Fr_FR::HTML' do
     ['Dr', 'D<sup>r</sup>'],
     ['cie', 'c<sup>ie</sup>'],
     ['Cie', 'C<sup>ie</sup>'],
-    ['Sté', 'S<sup>té</sup>']
+    ['Sté', 'S<sup>té</sup>'],
+
+    ['précieuse', 'précieuse'],
+    ['contesté', 'contesté'],
+    ['perdreaux', 'perdreaux'],
   ]
   abbrWithSuperText.each do |src, expected|
     it "replaces #{src} with #{expected}" do
