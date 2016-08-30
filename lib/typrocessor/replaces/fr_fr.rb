@@ -1,3 +1,13 @@
+# Natural rules order:
+#
+# - Punctuations
+# - Quotes
+# - Spaces
+# - Currencies
+# - Ordinals
+# - Dates
+# - Ligatures
+# - HTML
 module Typrocessor::Replace::Fr_FR
   extend Typrocessor::RulesetMaker
 
