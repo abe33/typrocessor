@@ -1,10 +1,10 @@
 module Typrocessor::Replace::En_UK
   extend Typrocessor::RulesetMaker
 
-  Spaces = ruleset do
-    sp = Typrocessor::Constants::ANY_SPACE
-    spg = Typrocessor::Constants::SPACE_GROUP
+  sp = Typrocessor::Constants::ANY_SPACE
+  spg = Typrocessor::Constants::SPACE_GROUP
 
+  Spaces = ruleset do
     replace 'no space before punctuation', /#{sp}+(\.|,|;|:|!|\?|%|\)|\u2019|\u2026|\u2030|\u2031)/, '\1'
     replace 'no space after parenthesis', /(\()#{sp}+/, '\1'
     replace 'no space after quote', /([^s])(\u2019)#{sp}+/, '\1\2'
@@ -21,6 +21,10 @@ module Typrocessor::Replace::En_UK
     replace 'no space before right quote', /([^#{spg}])#{sp}*(\u201d)/, '\1\2'
 
     replace 'non breaking space after honorific', /(Mr|Mrs|Ms|Miss|Sir|Lady)#{sp}*([A-Z])/, "\\1\u00a0\\2"
+  end
+
+  Currencies = ruleset do
+    replace 'no space after currency', /([#{Typrocessor::Constants::CURRENCIES_REGEX}])#{sp}?(\d)/, '\1\2'
   end
 
   HTML = ruleset do

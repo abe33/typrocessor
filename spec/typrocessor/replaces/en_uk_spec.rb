@@ -98,6 +98,18 @@ describe 'Typrocessor::Replace::En_UK::Spaces' do
   end
 end
 
+describe 'Typrocessor::Replace::En_UK::Currencies' do
+  let(:processor) { Typrocessor::Processor.new(options) }
+  let(:options) do { rules: [Typrocessor::Replace::En_UK::Currencies] } end
+
+  Typrocessor::Constants::CURRENCIES.keys.each do |char|
+    it "removes a space after #{char}" do
+      expect(processor.process("#{char} 10")).to eq("#{char}10")
+      expect(processor.process("#{char}10")).to eq("#{char}10")
+    end
+  end
+end
+
 describe 'Typrocessor::Replace::En_UK::HTML' do
   let(:processor) { Typrocessor::Processor.new(options) }
   let(:options) do { rules: [Typrocessor::Replace::En_UK::HTML] } end
