@@ -93,7 +93,7 @@ module Typrocessor::Replace::Fr_FR
       divider = value.to_f
       size = value.size
 
-      replace "#{value}s", /(?<!\d)\d{#{size},#{size + 2}}(?![,.\d])/ do |m|
+      replace "#{value}s", /(?<!\d)[1-9]\d{#{size-1},#{size+1}}(?![,.\d])/ do |m|
         if m =~ /0{#{size-2},#{size-1}}$/
           n = m.to_i / divider
           n >= 2 ? "#{n} #{word}s" : "#{n} #{word}"
@@ -103,7 +103,7 @@ module Typrocessor::Replace::Fr_FR
       end
     end
 
-    replace 'number spacing', /\d{4}\d+/ do |m|
+    replace 'number spacing', /(?<!\d)[1-9]\d{3}\d+/ do |m|
       m.reverse.split(/(\d{3})/).select {|s| !s.empty? }.join(' ').reverse
     end
     replace 'dot in number', /(\d)\.(\d)/, '\1,\2'

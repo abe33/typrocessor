@@ -228,6 +228,10 @@ describe 'Typrocessor::Replace::Fr_FR::Numbers' do
     expect(processor.process('1024001')).to eq('1 024 001')
   end
 
+  it 'ignores numbers that starts with a 0' do
+    expect(processor.process('01024001')).to eq('01024001')
+  end
+
   it 'replaces big round numbers with the text representation' do
     expect(processor.process('1500000')).to eq('1,5 million')
     expect(processor.process('2300000')).to eq('2,3 millions')
@@ -238,6 +242,10 @@ describe 'Typrocessor::Replace::Fr_FR::Numbers' do
     expect(processor.process('2300000000')).to eq('2,3 milliards')
     expect(processor.process('2300000000,50')).to eq('2 300 000 000,50')
     expect(processor.process('2346546546')).to eq('2 346 546 546')
+  end
+
+  it 'ignores big numbers that starts with a 0' do
+    expect(processor.process('010200000000')).to eq('010200000000')
   end
 end
 
