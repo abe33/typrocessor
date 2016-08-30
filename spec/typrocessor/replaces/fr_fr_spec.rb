@@ -277,3 +277,46 @@ describe 'Typrocessor::Replace::Fr_FR::Ligatures' do
     expect(processor.process('TAENIA')).to eq("T\u00c6NIA")
   end
 end
+
+describe 'Typrocessor::Replace::Fr_FR::HTML' do
+  let(:processor) { Typrocessor::Processor.new(options) }
+  let(:options) do { rules: [Typrocessor::Replace::Fr_FR::HTML] } end
+
+  abbrWithSuperText = [
+    ['Mme', 'M<sup>me</sup>'],
+    ['Mmes', 'M<sup>mes</sup>'],
+    ['Mlle', 'M<sup>lle</sup>'],
+    ['Mlles', 'M<sup>lles</sup>'],
+    ['Me', 'M<sup>e</sup>'],
+    ['Mgr', 'M<sup>gr</sup>'],
+    ['Dr', 'D<sup>r</sup>'],
+    ['cie', 'c<sup>ie</sup>'],
+    ['Cie', 'C<sup>ie</sup>'],
+    ['Sté', 'S<sup>té</sup>']
+  ]
+  abbrWithSuperText.each do |src, expected|
+    it "replaces #{src} with #{expected}" do
+      expect(processor.process(src)).to eq(expected)
+    end
+  end
+
+  ordinalNumbers = [
+    ['1re', '1<sup class="ord">re</sup>'],
+    ['1re', '1<sup class="ord">re</sup>'],
+    ['2e', '2<sup class="ord">e</sup>'],
+    ['2e', '2<sup class="ord">e</sup>'],
+    ['3e', '3<sup class="ord">e</sup>'],
+    ['3e', '3<sup class="ord">e</sup>'],
+    ['10e', '10<sup class="ord">e</sup>'],
+    ['1res', '1<sup class="ord">res</sup>'],
+    ['1res', '1<sup class="ord">res</sup>'],
+    ['2es', '2<sup class="ord">es</sup>'],
+    ['2es', '2<sup class="ord">es</sup>'],
+    ['10èmes', '10<sup class="ord">èmes</sup>']
+  ]
+  ordinalNumbers.each do |src, expected|
+    it "replaces #{src} with #{expected}" do
+      expect(processor.process(src)).to eq(expected)
+    end
+  end
+end
