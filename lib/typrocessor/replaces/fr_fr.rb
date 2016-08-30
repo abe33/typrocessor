@@ -1,6 +1,8 @@
-# Natural rules order:
+# Preferred rules order:
 #
 # - Punctuations
+# - Abbreviations
+# - Numbers
 # - Quotes
 # - Spaces
 # - Currencies
