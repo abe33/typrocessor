@@ -147,9 +147,9 @@ describe 'Typrocessor::Replace::Fr_FR::Currencies' do
   end
 end
 
-describe 'Typrocessor::Replace::Fr_FR::Punctuations' do
+describe 'Typrocessor::Replace::Fr_FR::Abbreviations' do
   let(:processor) { Typrocessor::Processor.new(options) }
-  let(:options) do { rules: [Typrocessor::Replace::Fr_FR::Punctuations] } end
+  let(:options) do { rules: [Typrocessor::Replace::Fr_FR::Abbreviations] } end
 
   it "replace N° with N\u00ba" do
     expect(processor.process('N°')).to eq("N\u00ba")
@@ -187,6 +187,16 @@ describe 'Typrocessor::Replace::Fr_FR::Punctuations' do
       expect(processor.process(form)).to eq("c.\u2011à\u2011d.")
     end
   end
+
+  it 'does not replaces cad in a word' do
+    expect(processor.process('cadeaux')).to eq('cadeaux')
+    expect(processor.process('arcade')).to eq('arcade')
+  end
+end
+
+describe 'Typrocessor::Replace::Fr_FR::Punctuations' do
+  let(:processor) { Typrocessor::Processor.new(options) }
+  let(:options) do { rules: [Typrocessor::Replace::Fr_FR::Punctuations] } end
 
   it 'replaces hyphen in sentences with dashes' do
     expect(processor.process('- foo - bar - foo-bar')).to eq("- foo \u2013 bar \u2013 foo-bar")

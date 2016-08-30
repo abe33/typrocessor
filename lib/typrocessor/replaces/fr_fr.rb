@@ -37,13 +37,16 @@ module Typrocessor::Replace::Fr_FR
   end
 
   Punctuations = ruleset do
-    replace 'male honorific', /Mr\.?/, 'M.'
-    replace 'possessive interrogative', /a(-|\u2011)t'il/, "a\u2011t\u2011il"
-    replace 'cad', /c\.?(-|\u2011)?[aà](-|\u2011)?d\.?/, "c.\u2011à\u2011d."
-    replace 'number abbr', /(n|N)°/, "\\1\u00ba"
     replace 'en dash between words', /(\D\x20)-(\x20\D)/, "\\1\u2013\\2"
     replace 'en dash between numbers', /(\d)#{sp}*(?:-|\u2011)#{sp}*(\d)/, "\\1\u2013\\2"
     replace 'anti', /anti(?:-|\u2011)([^i]\w+)(?!-|\u2011)\b/, 'anti\1'
+  end
+
+  Abbreviations = ruleset do
+    replace 'male honorific', /Mr\.?/, 'M.'
+    replace 'possessive interrogative', /a(-|\u2011)t'il/, "a\u2011t\u2011il"
+    replace 'cad', /(?<!\w)c\.?(-|\u2011)?[aà](-|\u2011)?d\.?(?!\w)/, "c.\u2011à\u2011d."
+    replace 'number abbr', /(n|N)°/, "\\1\u00ba"
   end
 
   Currencies = ruleset do
