@@ -7,6 +7,7 @@ require 'typrocessor/ignore'
 require 'typrocessor/constants'
 require 'typrocessor/lowercase'
 require 'typrocessor/uppercase'
+require 'typrocessor/utils'
 
 require 'typrocessor/ignores/html'
 require 'typrocessor/ignores/markdown'

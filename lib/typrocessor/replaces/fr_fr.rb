@@ -106,7 +106,7 @@ module Typrocessor::Replace::Fr_FR
     end
 
     replace 'number spacing', /(?<!\d)[1-9]\d{3}\d+/ do |m|
-      m.reverse.split(/(\d{3})/).select {|s| !s.empty? }.join("\u00a0").reverse
+      Typrocessor::Utils.space_by_group(m, 3, "\u00a0")
     end
     replace 'dot in number', /(\d)\.(\d)/, '\1,\2'
   end
