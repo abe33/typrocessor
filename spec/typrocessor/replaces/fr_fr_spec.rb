@@ -224,8 +224,8 @@ describe 'Typrocessor::Replace::Fr_FR::Numbers' do
 
   it 'spaces numbers using the proper separator when there is at least five chars' do
     expect(processor.process('1024')).to eq('1024')
-    expect(processor.process('102400')).to eq('102 400')
-    expect(processor.process('1024001')).to eq('1 024 001')
+    expect(processor.process('102400')).to eq("102\u00a0400")
+    expect(processor.process('1024001')).to eq("1\u00a0024\u00a0001")
   end
 
   it 'ignores numbers that starts with a 0' do
@@ -233,15 +233,15 @@ describe 'Typrocessor::Replace::Fr_FR::Numbers' do
   end
 
   it 'replaces big round numbers with the text representation' do
-    expect(processor.process('1500000')).to eq('1,5 million')
-    expect(processor.process('2300000')).to eq('2,3 millions')
-    expect(processor.process('2300000,50')).to eq('2 300 000,50')
-    expect(processor.process('2356465')).to eq('2 356 465')
+    expect(processor.process('1500000')).to eq("1,5\u00a0million")
+    expect(processor.process('2300000')).to eq("2,3\u00a0millions")
+    expect(processor.process('2300000,50')).to eq("2\u00a0300\u00a0000,50")
+    expect(processor.process('2356465')).to eq("2\u00a0356\u00a0465")
 
-    expect(processor.process('1500000000')).to eq('1,5 milliard')
-    expect(processor.process('2300000000')).to eq('2,3 milliards')
-    expect(processor.process('2300000000,50')).to eq('2 300 000 000,50')
-    expect(processor.process('2346546546')).to eq('2 346 546 546')
+    expect(processor.process('1500000000')).to eq("1,5\u00a0milliard")
+    expect(processor.process('2300000000')).to eq("2,3\u00a0milliards")
+    expect(processor.process('2300000000,50')).to eq("2\u00a0300\u00a0000\u00a0000,50")
+    expect(processor.process('2346546546')).to eq("2\u00a0346\u00a0546\u00a0546")
   end
 
   it 'ignores big numbers that starts with a 0' do
