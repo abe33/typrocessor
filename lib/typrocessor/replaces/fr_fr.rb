@@ -2,6 +2,7 @@
 #
 # - Punctuations
 # - Abbreviations
+# - Phone
 # - Numbers
 # - Quotes
 # - Spaces
@@ -79,6 +80,16 @@ module Typrocessor::Replace::Fr_FR
     replace 'upper oe', /O[eE]/, "\u0152"
     replace 'lower ae', /ae/, "\u00e6"
     replace 'upper ae', /A[eE]/, "\u00c6"
+  end
+
+  Phone = ruleset do
+    replace 'local phone number', /(?<!\d)0\d{9}(?!\d)/ do |m|
+      Typrocessor::Utils.space_by_group(m, 2, "\u00a0")
+    end
+
+    replace 'international phone number', /(\+\d{2})(\d{9})(?!\d)/ do |m|
+      "#{m[0..2]}\u00a0#{Typrocessor::Utils.space_by_group(m[3..-1], 2, "\u00a0")}"
+    end
   end
 
   Numbers = ruleset do

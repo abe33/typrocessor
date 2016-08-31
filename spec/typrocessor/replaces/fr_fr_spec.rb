@@ -214,6 +214,19 @@ describe 'Typrocessor::Replace::Fr_FR::Punctuations' do
   end
 end
 
+describe 'Typrocessor::Replace::Fr_FR::Phone' do
+  let(:processor) { Typrocessor::Processor.new(options) }
+  let(:options) do { rules: [Typrocessor::Replace::Fr_FR::Phone] } end
+
+  it 'adds spaces in a phone number without international prefix' do
+    expect(processor.process('0621388902')).to eq("06\u00a021\u00a038\u00a089\u00a002")
+  end
+
+  it 'adds spaces in a phone number with international prefix' do
+    expect(processor.process('+33621388902')).to eq("+33\u00a06\u00a021\u00a038\u00a089\u00a002")
+  end
+end
+
 describe 'Typrocessor::Replace::Fr_FR::Numbers' do
   let(:processor) { Typrocessor::Processor.new(options) }
   let(:options) do { rules: [Typrocessor::Replace::Fr_FR::Numbers] } end
