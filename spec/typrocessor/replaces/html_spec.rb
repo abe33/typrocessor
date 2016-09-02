@@ -19,4 +19,9 @@ describe 'Typrocessor::Replace::HTML' do
     expect(processor.process('foo BAR foo')).to eq('foo <span class="caps">BAR</span> foo')
     expect(processor.process('B.A.R.')).to eq('<span class="caps">B.A.R.</span>')
   end
+
+  it 'replaces non-breaking spaces with their html entity' do
+    expect(processor.process("foo\u00a0bar")).to eq('foo&nbsp;bar')
+    expect(processor.process("foo\u202fbar")).to eq('foo&#8239;bar')
+  end
 end
