@@ -15,4 +15,9 @@ describe 'Typrocessor::Replace::LineBreaks' do
   it 'adds a non-breaking space between the two last words of a paragraph' do
     expect(processor.process("Word word word word word.\nWord word word word word.\n\nWord word word word word.")).to eq("Word word word word\u00a0word.\nWord word word word\u00a0word.\n\nWord word word word\u00a0word.")
   end
+
+  it 'adds a non-breaking space between the two last words of a paragraph event if one the two last word has an hyphen' do
+    expect(processor.process("Word word word word word.\nWord word word word word.\n\nWord word word-word word.")).to eq("Word word word word\u00a0word.\nWord word word word\u00a0word.\n\nWord word word-word\u00a0word.")
+    expect(processor.process("Word word word word word.\nWord word word word word.\n\nWord word word word-word.")).to eq("Word word word word\u00a0word.\nWord word word word\u00a0word.\n\nWord word word\u00a0word-word.")
+  end
 end
