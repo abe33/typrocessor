@@ -314,6 +314,41 @@ describe 'Typrocessor::Replace::Fr_FR::Dates' do
   end
 end
 
+describe 'Typrocessor::Replace::Fr_FR::Diacritics' do
+  let(:processor) { Typrocessor::Processor.new(options) }
+  let(:options) do { rules: [Typrocessor::Replace::Fr_FR::Diacritics] } end
+
+  diacritics = [
+    ["\u0045\u0301", 'É'],
+    ["\u0045\u0300", 'È'],
+    ["\u0045\u0302", 'Ê'],
+    ["\u0065\u0301", 'é'],
+    ["\u0065\u0300", 'è'],
+    ["\u0065\u0302", 'ê'],
+    ["\u0041\u0300", 'À'],
+    ["\u0041\u0302", 'Â'],
+    ["\u0061\u0300", 'à'],
+    ["\u0061\u0302", 'â'],
+    ["\u004F\u0302", 'Ô'],
+    ["\u006F\u0302", 'ô'],
+    ["\u0055\u0300", 'Ù'],
+    ["\u0055\u0302", 'Û'],
+    ["\u0075\u0300", 'ù'],
+    ["\u0075\u0302", 'û'],
+    ["\u0049\u0302", 'Î'],
+    ["\u0069\u0302", 'î'],
+    ["\u0043\u0327", 'Ç'],
+    ["\u0063\u0327", 'ç'],
+  ]
+
+  diacritics.each do |src, expected|
+    it "replaces '#{src}' with '#{expected}'" do
+      expect(processor.process(src)).to eq(expected)
+    end
+  end
+
+end
+
 describe 'Typrocessor::Replace::Fr_FR::Ligatures' do
   let(:processor) { Typrocessor::Processor.new(options) }
   let(:options) do { rules: [Typrocessor::Replace::Fr_FR::Ligatures] } end

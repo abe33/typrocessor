@@ -82,6 +82,34 @@ module Typrocessor::Replace::Fr_FR
     replace 'upper ae', /A[eE]/, "\u00c6"
   end
 
+  Diacritics = ruleset do
+    replace 'E acute', /\u0045\u0301/, 'É'
+    replace 'E grav', /\u0045\u0300/, 'È'
+    replace 'E circ', /\u0045\u0302/, 'Ê'
+    replace 'e acute', /\u0065\u0301/, 'é'
+    replace 'e grav', /\u0065\u0300/, 'è'
+    replace 'e circ', /\u0065\u0302/, 'ê'
+
+    replace 'A grav', /\u0041\u0300/, 'À'
+    replace 'A circ', /\u0041\u0302/, 'Â'
+    replace 'a grav', /\u0061\u0300/, 'à'
+    replace 'a circ', /\u0061\u0302/, 'â'
+
+    replace 'O circ', /\u004F\u0302/, 'Ô'
+    replace 'o circ', /\u006F\u0302/, 'ô'
+
+    replace 'U grav', /\u0055\u0300/, 'Ù'
+    replace 'U circ', /\u0055\u0302/, 'Û'
+    replace 'u grav', /\u0075\u0300/, 'ù'
+    replace 'u circ', /\u0075\u0302/, 'û'
+
+    replace 'I circ', /\u0049\u0302/, 'Î'
+    replace 'i circ', /\u0069\u0302/, 'î'
+
+    replace 'C ced', /\u0043\u0327/, 'Ç'
+    replace 'c ced', /\u0063\u0327/, 'ç'
+  end
+
   Phone = ruleset do
     replace 'local phone number', /(?<!\d)0\d{9}(?!\d)/ do |m|
       Typrocessor::Utils.space_by_group(m, 2, "\u00a0")
