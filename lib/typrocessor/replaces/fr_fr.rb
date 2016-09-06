@@ -1,9 +1,11 @@
 # Preferred rules order:
 #
+# - Diacritics
 # - Punctuations
 # - Abbreviations
 # - Phone
 # - Numbers
+# - NonSexist
 # - Quotes
 # - Spaces
 # - Currencies
