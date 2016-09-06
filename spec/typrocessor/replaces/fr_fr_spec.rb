@@ -346,7 +346,24 @@ describe 'Typrocessor::Replace::Fr_FR::Diacritics' do
       expect(processor.process(src)).to eq(expected)
     end
   end
+end
 
+describe 'Typrocessor::Replace::Fr_FR::NonSexist' do
+  let(:processor) { Typrocessor::Processor.new(options) }
+  let(:options) do { rules: [Typrocessor::Replace::Fr_FR::NonSexist] } end
+
+  it 'replaces parenthesis with median period' do
+    expect(processor.process('ami(e)s')).to eq('ami·e·s')
+    expect(processor.process('professeur(e)')).to eq('professeur·e')
+    expect(processor.process('amateur(trice)')).to eq('amateur·trice')
+
+    expect(processor.process('amateur (trice)')).to eq('amateur (trice)')
+  end
+
+  it 'replaces case changes with median period' do
+    expect(processor.process('amiEs')).to eq('ami·e·s')
+    expect(processor.process('professeurE')).to eq('professeur·e')
+  end
 end
 
 describe 'Typrocessor::Replace::Fr_FR::Ligatures' do

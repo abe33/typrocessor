@@ -16,6 +16,8 @@ module Typrocessor::Replace::Fr_FR
 
   sp = Typrocessor::Constants::ANY_SPACE
   spg = Typrocessor::Constants::SPACE_GROUP
+  low = "[#{Typrocessor::Constants::LOWERCASE.join}]"
+  up = "[#{Typrocessor::Constants::UPPERCASE.join}]"
 
   Spaces = ruleset do
     replace 'collapse multiple spaces', /\x20{2,}/, ' '
@@ -117,6 +119,18 @@ module Typrocessor::Replace::Fr_FR
 
     replace 'international phone number', /(\+\d{2})(\d{9})(?!\d)/ do |m|
       "#{m[0..2]}\u00a0#{Typrocessor::Utils.space_by_group(m[3..-1], 2, "\u00a0")}"
+    end
+  end
+
+  NonSexist = ruleset do
+    replace 'parenthesis at end', /(\w)\((\w+)\)(?=[#{spg}]|$)/, '\1·\2'
+    replace 'parenthesis inbetween', /(\w)\((\w+)\)(\w)/, '\1·\2·\3'
+
+    replace 'uppercase at end', /(#{low})(#{up}+)\b/ do |m|
+      "#{m[0]}·#{m[1..-1].downcase}"
+    end
+    replace 'uppercase inbetween', /(#{low})(#{up}+)(#{low})/ do |m|
+      "#{m[0]}·#{m[1..-2].downcase}·#{m[-1]}"
     end
   end
 
