@@ -76,9 +76,23 @@ describe 'Typrocessor::Replace::Es_ES::Spaces' do
   end
 end
 
-describe 'Typrocessor::Replace::Fr_FR::Currencies' do
+describe 'Typrocessor::Replace::Es_ES::Quotes' do
   let(:processor) { Typrocessor::Processor.new(options) }
-  let(:options) do { rules: [Typrocessor::Replace::Fr_FR::Currencies] } end
+  let(:options) do { rules: [Typrocessor::Replace::Es_ES::Quotes] } end
+
+  it 'replaces single quotes with typographic ones' do
+    expect(processor.process("qu'es el morir")).to eq("qu\u2019es el morir")
+  end
+
+  it 'replaces double quotes around a sentence by typographic quotes' do
+    expect(processor.process('Él me dijo, "Estoy muy feliz".')).to eq("Él me dijo, \u00abEstoy muy feliz\u00bb.")
+    expect(processor.process('Él me dijo, " Estoy muy feliz ".')).to eq("Él me dijo, \u00ab Estoy muy feliz \u00bb.")
+  end
+end
+
+describe 'Typrocessor::Replace::Es_ES::Currencies' do
+  let(:processor) { Typrocessor::Processor.new(options) }
+  let(:options) do { rules: [Typrocessor::Replace::Es_ES::Currencies] } end
 
   Typrocessor::Constants::CURRENCIES.keys.each do |char|
     it "replaces a simple space before #{char} a non-breaking one" do

@@ -20,6 +20,11 @@ module Typrocessor::Replace::Es_ES
     replace 'space before parenthesis', /([^#{spg}])(\()/, '\1 \2'
   end
 
+  Quotes = ruleset do
+    replace 'single quote', /(\w)'(\w)/, "\\1\u2019\\2"
+    replace 'double quote', /"([^"]+)"/, "\u00ab\\1\u00bb"
+  end
+
   Currencies = ruleset do
     replace 'space before currency', /(\d)\x20?([#{Typrocessor::Constants::CURRENCIES_REGEX}])/, "\\1\u00a0\\2"
   end
