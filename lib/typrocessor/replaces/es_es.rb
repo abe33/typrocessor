@@ -12,12 +12,12 @@ module Typrocessor::Replace::Es_ES
     replace 'no space around en-dash between numbers', /(\d)[#{spg}]*\u2013[#{spg}]*(\d)/, "\\1\u2013\\2"
     replace 'space around en-dash', /([^\d#{spg}])[#{spg}]*(\u2013)[#{spg}]*(\D)/, "\\1\u00a0\\2 \\3"
     replace 'space after  punctuation', /(\.|;|!|\?|%|\u2026|\u2030|\u2031)([^#{spg}\)])/, '\1 \2'
-    replace 'space after Colon', /(\D[#{spg}]?)(:)([^#{spg}\)])/, '\1\2 \3'
-    replace 'space after Comma', /(\D)(,)([^#{spg}\)])/, '\1\2 \3'
-    replace 'space after LeftQuote', /(\u00ab)[#{spg}]*([^#{spg}])/, "\\1\u202F\\2"
-    replace 'space before RightQuote', /([^#{spg}])[#{spg}]*(\u00bb)/, "\\1\u202F\\2"
-    replace 'space after Parenthesis', /(\))(\w)/, '\1 \2'
-    replace 'space before Parenthesis', /([^#{spg}])(\()/, '\1 \2'
+    replace 'space after colon', /(\D[#{spg}]?)(:)([^#{spg}\)])/, '\1\2 \3'
+    replace 'space after comma', /(\D)(,)([^#{spg}\)])/, '\1\2 \3'
+    replace 'space after left quote', /(\u00ab)[#{spg}]*([^#{spg}])/, "\\1\u202F\\2"
+    replace 'space before right quote', /([^#{spg}])[#{spg}]*(\u00bb)/, "\\1\u202F\\2"
+    replace 'space after parenthesis', /(\))(\w)/, '\1 \2'
+    replace 'space before parenthesis', /([^#{spg}])(\()/, '\1 \2'
   end
 
   Currencies = ruleset do
