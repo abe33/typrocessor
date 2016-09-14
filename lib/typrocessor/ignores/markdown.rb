@@ -1,7 +1,7 @@
 class Typrocessor::Ignore
   Markdown = ruleset do
     ignore 'link or image start', /!?\[/
-    ignore 'link or image url', /\]\([^\)]+\)/
+    ignore 'link or image url', /\]\s*\([^\)]+\)/
     ignore 'link or image from external definition', /\]\s*\[[^\]]*\]/
     ignore 'link or image external definition', /\[[^\]]+\]:.*$/
     ignore 'code block', /(```)(.|\n)*?\1/m

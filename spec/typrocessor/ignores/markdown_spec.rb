@@ -17,10 +17,14 @@ describe 'Typrocessor::Ignore::Markdown' do
 
   it 'preserves inline images' do
     expect(processor.process('![foo](http://foo.com/foo.jpg "foo")')).to eq('![bar](http://foo.com/foo.jpg "foo")')
+    expect(processor.process('![foo] (http://foo.com/foo.jpg "foo")')).to eq('![bar] (http://foo.com/foo.jpg "foo")')
   end
 
   it 'preserves inline links' do
     expect(processor.process('[foo](http://foo.com/foo.jpg)')).to eq('[bar](http://foo.com/foo.jpg)')
+    expect(processor.process('[foo] (http://foo.com/foo.jpg)')).to eq('[bar] (http://foo.com/foo.jpg)')
+
+    expect(processor.process('[%(foo) foo de foo foo] (/foo/link-with-hyphens)')).to eq('[%(bar) bar de bar bar] (/foo/link-with-hyphens)')
   end
 
   it 'preserves images with external definitions' do
