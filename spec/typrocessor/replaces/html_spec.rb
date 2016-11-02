@@ -17,6 +17,7 @@ describe 'Typrocessor::Replace::HTML' do
 
   it 'wraps capital letters in a span' do
     expect(processor.process('foo BAR foo')).to eq('foo <span class="caps">BAR</span> foo')
+    expect(processor.process('LÉON BAR')).to eq('<span class="caps">LÉON BAR</span>')
     expect(processor.process('B.A.R.')).to eq('<span class="caps">B.A.R.</span>')
   end
 
