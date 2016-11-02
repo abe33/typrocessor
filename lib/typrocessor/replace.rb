@@ -19,7 +19,7 @@ module Typrocessor
       re = get_regexp
 
       replacement.is_a?(Proc) ?
-        string.gsub(re, &replacement) :
+        (string.gsub(re) {|m| replacement.call(m, Regexp.last_match) })  :
         string.gsub(re, replacement)
     end
   end
