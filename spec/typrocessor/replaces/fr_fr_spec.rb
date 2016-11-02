@@ -46,6 +46,11 @@ describe 'Typrocessor::Replace::Fr_FR::Spaces' do
     end
   end
 
+  it "does not add a space after . if in an acronym" do
+    expect(processor.process("R.R.")).to eq("R.R.")
+    expect(processor.process("i.e.")).to eq("i.e.")
+  end
+
   it 'does not remove the space after a comma between two numbers' do
     expect(processor.process('Dans 20, 30 ou 50 ans')).to eq('Dans 20, 30 ou 50 ans')
   end

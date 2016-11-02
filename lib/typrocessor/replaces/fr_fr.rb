@@ -32,7 +32,7 @@ module Typrocessor::Replace::Fr_FR
     replace 'non breaking space before colon between two numbers 2', /(\d)#{sp}(:)(\d)/, "\\1\u202F\\2\\3"
     replace 'non breaking space before colon after number', /(\d)#{sp}*(:)(\D)/, "\\1\u202F\\2\\3"
     replace 'space after punctuation', /(;|!|\?|%|\u2026|\u2030|\u2031)([^#{sp}\)])/, '\1 \2'
-    replace 'space after period', /(\.)([^\)\u2011#{spg}-])/, '\1 \2'
+    replace 'space after period', /(?<!\b\w)(\.)([^\)\u2011#{spg}-])/, '\1 \2'
     replace 'space after colon', /(\D#{sp}?)(:)([^#{spg}\)])/, '\1\2 \3'
     replace 'space after comma', /(\D)(,)([^#{spg}\)])/, '\1\2 \3'
     replace 'space after parenthesis', /(\))(\w)/, '\1 \2'
