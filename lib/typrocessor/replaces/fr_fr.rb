@@ -74,7 +74,7 @@ module Typrocessor::Replace::Fr_FR
   end
 
   Dates = ruleset do
-    replace 'days and months', /(Lundi|Mardi|Mercredi|Jeudi|Vendredi|Samedi|Dimanche|Janvier|Février|Mars|Avril|Mai|Juin|Juillet|Aout|Septembre|Octobre|Novembre|Décembre)/ do |s|
+    replace 'days and months', /\b(Lundi|Mardi|Mercredi|Jeudi|Vendredi|Samedi|Dimanche|Janvier|Février|Mars|Avril|Mai|Juin|Juillet|Aout|Septembre|Octobre|Novembre|Décembre)\b/ do |s|
       s.downcase
     end
   end
@@ -128,11 +128,11 @@ module Typrocessor::Replace::Fr_FR
     replace 'parenthesis at end', /(\w)\((\w+)\)(?=[#{spg}]|$)/, '\1·\2'
     replace 'parenthesis inbetween', /(\w)\((\w+)\)(\w)/, '\1·\2·\3'
 
-    replace 'uppercase at end', /(#{low})(#{up}+)\b/ do |m|
-      "#{m[0]}·#{m[1..-1].downcase}"
+    replace 'uppercase at end', /\b(#{low}+)(#{up}+)\b/ do |_, m|
+      "#{m[1]}·#{m[2].downcase}"
     end
-    replace 'uppercase inbetween', /(#{low})(#{up}+)(#{low})/ do |m|
-      "#{m[0]}·#{m[1..-2].downcase}·#{m[-1]}"
+    replace 'uppercase inbetween', /\b(#{low}+)(#{up}+)(#{low})/ do |_, m|
+      "#{m[1]}·#{m[2].downcase}·#{m[3]}"
     end
   end
 

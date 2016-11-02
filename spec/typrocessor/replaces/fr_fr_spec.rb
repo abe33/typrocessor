@@ -312,6 +312,11 @@ describe 'Typrocessor::Replace::Fr_FR::Dates' do
       expect(processor.process(string)).to eq(string.downcase)
     end
   end
+
+  it 'does not touch to words that contains a month or day name' do
+    expect(processor.process('Marseille')).to eq('Marseille')
+    expect(processor.process('Mais')).to eq('Mais')
+  end
 end
 
 describe 'Typrocessor::Replace::Fr_FR::Diacritics' do
@@ -363,6 +368,7 @@ describe 'Typrocessor::Replace::Fr_FR::NonSexist' do
   it 'replaces case changes with median period' do
     expect(processor.process('amiEs')).to eq('ami·e·s')
     expect(processor.process('professeurE')).to eq('professeur·e')
+    expect(processor.process('McKay')).to eq('McKay')
   end
 end
 
