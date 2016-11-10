@@ -9,6 +9,6 @@ class Typrocessor::Ignore
     ignore 'inline code', /(`{1,2}).*?\1/
     ignore 'strong', /\*\*|__/
 
-    ignore 'urls', /\b((?:[a-zA-Z][\w-]+:(?:\/{1,3}|[a-zA-Z0-9%])|www\d{0,3}[.]|[a-zA-Z0-9.\-]+[.][a-zA-Z]{2,4}\/)(?:[^\s()<>]+|\(([^\s()<>]+|(\([^\s()<>]+\)))*\))+(?:\(([^\s()<>]+|(\([^\s()<>]+\)))*\)|[^\s`!()\[\]{};:'".,<>?\u00AB\u00BB\u201C\u201D\u2018\u2019]))/
+    ignore 'urls', /\bhttp(s?)[^\s\)\]]*/ # more complex regex induces VERY long processing times
   end
 end
