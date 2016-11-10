@@ -20,10 +20,10 @@ describe 'Typrocessor::Ignore::Markdown' do
     expect(processor.process('![foo] (http://foo.com/foo.jpg "foo")')).to eq('![bar] (http://foo.com/foo.jpg "foo")')
   end
 
-  it 'preserves inline links' do
+  it 'preserves inline links', focus: true do
     expect(processor.process('[foo](http://foo.com/foo.jpg)')).to eq('[bar](http://foo.com/foo.jpg)')
     expect(processor.process('[foo] (http://foo.com/foo.jpg)')).to eq('[bar] (http://foo.com/foo.jpg)')
-
+    expect(processor.process('[https://www.foofoofoofoo.fr/](https://www.foofoofoofoo.fr/)')).to eq('[https://www.foofoofoofoo.fr/](https://www.foofoofoofoo.fr/)')
     expect(processor.process('[%(foo) foo de foo foo] (/foo/link-with-hyphens)')).to eq('[%(bar) bar de bar bar] (/foo/link-with-hyphens)')
   end
 
