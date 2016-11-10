@@ -11,5 +11,4 @@ RSpec.configure do |config|
   # config.formatter = :documentation # :progress, :html, :textmate
 
   config.order = :random
-
 end
